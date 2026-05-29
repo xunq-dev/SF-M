@@ -1,4 +1,4 @@
-````md
+```md
 <p align="center">
   <img src="logo%20presets/unreleased-sx3.png" width="128" alt="Synapse Framework MAC">
 </p>
@@ -32,7 +32,7 @@
    ╚══════╝   ╚═╝   ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝
 
                 Framework MAC
-````
+```
 
 Native macOS executor framework built with React, Tauri, and Rust.
 
