@@ -82,6 +82,29 @@ Native macOS executor framework built with React, Tauri, and Rust!
                ▼                         ▼
         Roblox Executors         Roblox Executors
 ```
+## Support
+
+If you're a crypto nerd simultaneously while for some reason wanting to donate to me lmao:
+
+### BTC
+```text
+bc1q78uvy304rmkpvs87t5tml8qmjzklkph77ntrsq
+```
+
+### SOL
+```text
+2Sf1AuNXcUMjj1gkZ2hdkeGSJdziWyAnEwDSW6Wjv3jP
+```
+
+### ETH
+```text
+0x1DF67A2b3661c828a1213E600AfCacC21f1471b8
+```
+
+### LTC
+```text
+LRYyQ3GznGNssbs37SEqX27MJh9HxPEg7h
+```
 
 ## Installation
 
