@@ -1,38 +1,30 @@
-```md
 <p align="center">
-  <img src="logo%20presets/unreleased-sx3.png" width="128" alt="Synapse Framework MAC">
+<pre>
+███████╗██╗   ██╗███╗   ██╗ █████╗ ██████╗ ███████╗██╗  ██╗
+██╔════╝╚██╗ ██╔╝████╗  ██║██╔══██╗██╔══██╗██╔════╝██║  ██║
+███████╗ ╚████╔╝ ██╔██╗ ██║███████║██████╔╝█████╗  ███████║
+╚════██║  ╚██╔╝  ██║╚██╗██║██╔══██║██╔═══╝ ██╔══╝  ██╔══██║
+███████║   ██║   ██║ ╚████║██║  ██║██║     ███████╗██║  ██║
+╚══════╝   ╚═╝   ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝
+</pre>
 </p>
 
 <h1 align="center">Synapse Framework MAC</h1>
 
 <p align="center">
-  Advanced Roblox Script Execution Environment for macOS
+  A modern Synapse-inspired scripting environment for macOS
 </p>
 
 <p align="center">
-  Monaco Editor • WebSocket Bridge • Multiple Synapse Interfaces • Native Tauri Application
+  React • Tauri • Rust • Monaco • WebSocket Bridge
 </p>
 
 <p align="center">
   <a href="#features">Features</a> •
   <a href="#installation">Installation</a> •
-  <a href="#building">Building</a> •
-  <a href="#architecture">Architecture</a> •
-  <a href="#documentation">Documentation</a>
+  <a href="#development">Development</a> •
+  <a href="#architecture">Architecture</a>
 </p>
-
----
-
-```text
-   ███████╗██╗   ██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗
-   ██╔════╝╚██╗ ██╔╝████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝
-   ███████╗ ╚████╔╝ ██╔██╗ ██║███████║██████╔╝███████╗█████╗
-   ╚════██║  ╚██╔╝  ██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝
-   ███████║   ██║   ██║ ╚████║██║  ██║██║     ███████║███████╗
-   ╚══════╝   ╚═╝   ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝
-
-                Framework MAC
-```
 
 Native macOS executor framework built with React, Tauri, and Rust.
 
