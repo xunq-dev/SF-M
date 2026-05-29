@@ -1,0 +1,42 @@
+{
+  "description": "Paths required for a full Synapse Framework build (npm run build + npm run tauri:build). Verified by scripts/verify-source.mjs.",
+  "excludeFromPack": [
+    "node_modules",
+    "dist",
+    "src-tauri/target",
+    "src-tauri/gen",
+    "someone-elses-v3-project-workspace",
+    "synapse-source-small.zip",
+    "ui-export"
+  ],
+  "packNotes": "npm run source:pack uses include-only paths below (never target/node_modules). ui-export and logo presets are optional flags.",
+  "requiredFiles": [
+    "package.json",
+    "package-lock.json",
+    "index.html",
+    "vite.config.ts",
+    "README.md",
+    "source.manifest.json"
+  ],
+  "requiredDirectories": [
+    "src",
+    "public",
+    "docs",
+    "scripts",
+    "src-tauri/src",
+    "src-tauri/icons",
+    "src-tauri/resources",
+    "src-tauri/wix",
+    "src-tauri/capabilities"
+  ],
+  "optionalDirectories": [
+    "logo presets",
+    "ui-export"
+  ],
+  "requiredTauriFiles": [
+    "src-tauri/Cargo.toml",
+    "src-tauri/Cargo.lock",
+    "src-tauri/tauri.conf.json",
+    "src-tauri/build.rs"
+  ]
+}

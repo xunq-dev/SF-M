@@ -1,0 +1,70 @@
+/**
+ * Text-only size step: when `html` has `data-shell-text-step-active`, `App` also sets
+ * `--shell-text-step-px`. At step 0 those hooks are removed so typography matches
+ * builds before this feature (plain Tailwind `text-[Npx]`).
+ *
+ * Elements with `[data-shell-fit-line]` opt out: they use JS-driven font-size so a
+ * single line can shrink to fit the parent instead of wrapping.
+ */
+html[data-shell-text-step-active] .text-\[6px\]:not([data-shell-fit-line]) { font-size: calc(6px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[7px\]:not([data-shell-fit-line]) { font-size: calc(7px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[8px\]:not([data-shell-fit-line]) { font-size: calc(8px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[9px\]:not([data-shell-fit-line]) { font-size: calc(9px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[10px\]:not([data-shell-fit-line]) { font-size: calc(10px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[11px\]:not([data-shell-fit-line]) { font-size: calc(11px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[12px\]:not([data-shell-fit-line]) { font-size: calc(12px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[13px\]:not([data-shell-fit-line]) { font-size: calc(13px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[14px\]:not([data-shell-fit-line]) { font-size: calc(14px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[15px\]:not([data-shell-fit-line]) { font-size: calc(15px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[16px\]:not([data-shell-fit-line]) { font-size: calc(16px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[17px\]:not([data-shell-fit-line]) { font-size: calc(17px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[18px\]:not([data-shell-fit-line]) { font-size: calc(18px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[19px\]:not([data-shell-fit-line]) { font-size: calc(19px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[20px\]:not([data-shell-fit-line]) { font-size: calc(20px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[21px\]:not([data-shell-fit-line]) { font-size: calc(21px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[22px\]:not([data-shell-fit-line]) { font-size: calc(22px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[23px\]:not([data-shell-fit-line]) { font-size: calc(23px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[24px\]:not([data-shell-fit-line]) { font-size: calc(24px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[25px\]:not([data-shell-fit-line]) { font-size: calc(25px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[26px\]:not([data-shell-fit-line]) { font-size: calc(26px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[27px\]:not([data-shell-fit-line]) { font-size: calc(27px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[28px\]:not([data-shell-fit-line]) { font-size: calc(28px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[29px\]:not([data-shell-fit-line]) { font-size: calc(29px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[30px\]:not([data-shell-fit-line]) { font-size: calc(30px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[31px\]:not([data-shell-fit-line]) { font-size: calc(31px + var(--shell-text-step-px)) !important; }
+html[data-shell-text-step-active] .text-\[32px\]:not([data-shell-fit-line]) { font-size: calc(32px + var(--shell-text-step-px)) !important; }
+
+html[data-shell-text-step-active] .leading-\[16px\]:not([data-shell-fit-line]) { line-height: calc(16px + var(--shell-text-step-px)) !important; }
+
+/**
+ * `data-shell-text-no-step` — only on tiny fixed-pixel overlays (e.g. sidebar hover card, attach bar).
+ * Re-assert design-token sizes so they are not shifted by the step rules (higher specificity).
+ */
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[6px\] { font-size: 6px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[7px\] { font-size: 7px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[8px\] { font-size: 8px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[9px\] { font-size: 9px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[10px\] { font-size: 10px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[11px\] { font-size: 11px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[12px\] { font-size: 12px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[13px\] { font-size: 13px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[14px\] { font-size: 14px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[15px\] { font-size: 15px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[16px\] { font-size: 16px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[17px\] { font-size: 17px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[18px\] { font-size: 18px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[19px\] { font-size: 19px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[20px\] { font-size: 20px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[21px\] { font-size: 21px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[22px\] { font-size: 22px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[23px\] { font-size: 23px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[24px\] { font-size: 24px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[25px\] { font-size: 25px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[26px\] { font-size: 26px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[27px\] { font-size: 27px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[28px\] { font-size: 28px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[29px\] { font-size: 29px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[30px\] { font-size: 30px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[31px\] { font-size: 31px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .text-\[32px\] { font-size: 32px !important; }
+html[data-shell-text-step-active] [data-shell-text-no-step] .leading-\[16px\] { line-height: 16px !important; }

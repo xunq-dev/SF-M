@@ -1,0 +1,242 @@
+/*
+ * synapse-error-glyph – Red ✕ icon rendered in the Monaco glyph margin.
+ * Displayed next to lines with detected syntax errors.
+ */
+.synapse-error-glyph {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 14px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/*
+ * Monaco hover widget override — ensure the tooltip that appears when
+ * hovering over the red ✕ or squiggly lines has a clean dark appearance
+ * consistent with the editor theme.
+ * Note: Widgets are attached to document.body via overflowWidgetsDomNode.
+ */
+.monaco-hover,
+.monaco-editor-hover {
+  background-color: #1e1e1e !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7) !important;
+  padding: 10px 14px !important;
+  color: #ffffff !important;
+}
+
+.monaco-hover .hover-row,
+.monaco-hover .hover-contents,
+.monaco-editor-hover .hover-row,
+.monaco-editor-hover .hover-contents {
+  color: #ffffff !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+.monaco-hover .hover-contents strong,
+.monaco-editor-hover .hover-contents strong {
+  color: #f87171 !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.monaco-hover .hover-contents code,
+.monaco-editor-hover .hover-contents code {
+  background: rgba(255, 255, 255, 0.12) !important;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glyph margin hover specifically */
+.monaco-hover[data-hover-source="glyphMargin"],
+.monaco-editor-hover[data-hover-source="glyphMargin"] {
+  background-color: rgba(30, 30, 35, 0.95) !important;
+  border: 1px solid rgba(248, 113, 113, 0.4) !important;
+  animation: synapse-fade-in 0.2s ease-out;
+}
+
+@keyframes synapse-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 
+ * Center line numbers in the gutter even when the glyph margin (Red X) is active.
+ */
+.monaco-editor .line-numbers {
+  position: absolute !important;
+  left: 0 !important;
+  width: 100% !important;
+  text-align: center !important;
+  padding: 0 !important;
+  color: #7a7a7a !important;
+  pointer-events: none; /* Allow clicks to pass through to glyphs/folding beneath */
+}
+
+.monaco-editor .line-numbers.active-line-number {
+  color: #bbbbbb !important;
+}
+
+/* AI edit proposal highlights */
+.synapse-ai-proposal-highlight {
+  background-color: var(--v3-ai-overlay-highlight-bg, rgba(234, 179, 8, 0.28)) !important;
+  border-radius: 2px;
+}
+
+.synapse-ai-proposal-highlight-active {
+  background-color: var(--v3-ai-overlay-highlight-active-bg, rgba(234, 179, 8, 0.45)) !important;
+  outline: 1px solid var(--v3-ai-overlay-panel-border, rgba(234, 179, 8, 0.6));
+}
+
+.synapse-ai-proposal-line-highlight {
+  background-color: var(--v3-ai-overlay-highlight-line-bg, rgba(234, 179, 8, 0.08)) !important;
+}
+
+.synapse-ai-diff-zone {
+  margin: 4px 8px 8px 8px;
+  padding: 0;
+  background: color-mix(in srgb, var(--v3-ai-overlay-diff-zone-bg, #141414) 95%, transparent);
+  border: 1px solid var(--v3-ai-overlay-diff-zone-border, rgba(255, 255, 255, 0.08));
+  border-left: 3px solid var(--v3-ai-overlay-panel-border, rgba(234, 179, 8, 0.5));
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.synapse-ai-diff-scroll {
+  max-height: 140px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 6px 8px;
+  box-sizing: border-box;
+}
+
+.synapse-ai-diff-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.synapse-ai-diff-scroll::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 2px;
+}
+
+.synapse-ai-diff-row {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin-bottom: 4px;
+  min-width: 0;
+}
+
+.synapse-ai-diff-row:last-child {
+  margin-bottom: 0;
+}
+
+.synapse-ai-diff-label {
+  flex-shrink: 0;
+  width: 12px;
+  font-weight: 700;
+}
+
+.synapse-ai-diff-removed .synapse-ai-diff-label,
+.synapse-ai-diff-removed .synapse-ai-diff-text {
+  color: var(--v3-ai-overlay-diff-removed-text, #f87171);
+}
+
+.synapse-ai-diff-removed .synapse-ai-diff-text {
+  text-decoration: line-through;
+  opacity: 0.85;
+}
+
+.synapse-ai-diff-added .synapse-ai-diff-label,
+.synapse-ai-diff-added .synapse-ai-diff-text {
+  color: var(--v3-ai-overlay-diff-added-text, #86efac);
+}
+
+.synapse-ai-diff-text {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  flex: 1;
+  min-width: 0;
+  max-height: none;
+  overflow: visible;
+}
+
+.synapse-ai-overlay-diff-wrap {
+  max-height: 140px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.synapse-ai-overlay-diff-wrap::-webkit-scrollbar {
+  width: 4px;
+}
+
+.synapse-ai-overlay-diff-wrap::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 2px;
+}
+
+.synapse-ai-overlay-diff {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.synapse-ai-overlay-diff-row {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  min-width: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.synapse-ai-overlay-diff-label {
+  flex-shrink: 0;
+  width: 10px;
+  font-weight: 700;
+  padding-top: 1px;
+}
+
+.synapse-ai-overlay-diff-text {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.synapse-ai-overlay-diff-removed .synapse-ai-overlay-diff-label,
+.synapse-ai-overlay-diff-removed .synapse-ai-overlay-diff-text {
+  color: var(--v3-ai-overlay-diff-removed-text, #f87171);
+}
+
+.synapse-ai-overlay-diff-added .synapse-ai-overlay-diff-label,
+.synapse-ai-overlay-diff-added .synapse-ai-overlay-diff-text {
+  color: var(--v3-ai-overlay-diff-added-text, #86efac);
+}
+

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Synapse UI</title>
+    <!--
+      Foolproof first-paint guard for V3's rounded corners.
+
+      The inline <style> below runs synchronously during HTML parsing, before
+      ANY external CSS is fetched and before main.tsx ever executes. It locks
+      html/body/#root to a transparent background, which is what V3 needs so
+      the DWM compositor sees through the rounded-corner cutouts and the
+      black square corners can never get composited on the first frame.
+
+      Every shell (Blue/Cosmic/Synapse X/V3) paints its own opaque background
+      on its own root element, so a transparent default for the document
+      stack is safe — there's nothing visible behind the shell wrappers.
+    -->
+    <style>
+      html, body, #root {
+        margin: 0;
+        height: 100%;
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

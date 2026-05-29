@@ -1,0 +1,248 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+@import './shell-text-scale.css';
+@import './monacoOverflowWidgets.css';
+
+/*
+ * Defaults before App sets tier-based values (see `applyUiFontVerticalMetricsToDocument`).
+ * Must match tier 0 in `src/ui/uiFontVerticalTuning.ts`.
+ */
+:root {
+  /* Matches App `useLayoutEffect` (positive UI text size step only). */
+  --shell-ui-font-step-positive: 0;
+  --shell-ui-input-min-h: 48px;
+  --shell-ui-input-lh: 1.62;
+  --shell-ui-select-min-h-app: 38px;
+  --shell-ui-select-min-h-wide: 44px;
+  --shell-ui-logo-strip-min-h: 40px;
+  --shell-fit-line-lh: 1.38;
+  --shell-fit-line-vert-extra-px: 0;
+  --shell-fit-block-lh: 1.42;
+  --shell-fit-block-scroll-extra-px: 0;
+}
+
+/* Themes tab text fields: tier line-height must win over any generic utility order. */
+.shell-theme-field {
+  line-height: var(--shell-ui-input-lh, 1.62) !important;
+}
+
+/*
+ * Default the html/body/#root stack to TRANSPARENT so the first paint
+ * never fills V3's rounded-corner cutouts with an opaque colour.
+ *
+ * Background story: `main.tsx` adds the `synapse-tauri` class at module
+ * load, but the CSS has already been applied by then — so any cold start
+ * that defaults to `#000` would composite an opaque square corner into
+ * the DWM surface before React mounts the rounded V3 shell. That black
+ * square got cached by the compositor and persisted until the user hit
+ * refresh. Defaulting to `transparent` removes the race entirely; the
+ * non-V3 shells paint their own opaque backgrounds via the App wrapper.
+ *
+ * Browser dev fallback (`html:not(.synapse-tauri)`) keeps the legacy
+ * black backdrop for the rare case the SPA is opened outside Tauri.
+ */
+html,
+body,
+#root {
+  min-height: 100dvh;
+  height: 100%;
+  margin: 0;
+  background-color: transparent;
+}
+
+html:not(.synapse-tauri),
+html:not(.synapse-tauri) body {
+  background-color: #000000;
+}
+
+/* Tauri WebView2: make the root chain fill the client area (percent heights can collapse). */
+html.synapse-tauri,
+html.synapse-tauri body {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+html.synapse-tauri #root {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+}
+
+/* No text selection in chrome; Monaco + form fields stay selectable */
+#root {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#root input,
+#root textarea,
+#root select,
+#root .monaco-editor,
+#root .monaco-editor * {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+.shell-console-output {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+/*
+ * Monaco hover / overlay widgets (detached or not): stack above shell chrome.
+ * Suggest + parameter hints on document.body are styled in monacoOverflowWidgets.css.
+ */
+.monaco-overlaywidget,
+.monaco-editor-hover,
+.monaco-hover {
+  z-index: 9999 !important;
+  font-family: Consolas, "Courier New", monospace !important;
+}
+
+/* Synapse-style scrollbars (gray chrome, subtle thumb) */
+.synapse-scroll {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #5a5a5a #2a2a2a;
+}
+
+.synapse-scroll::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.synapse-scroll::-webkit-scrollbar-track {
+  background: #252525;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.synapse-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #636363 0%, #4a4a4a 55%, #3d3d3d 100%);
+  border-radius: 4px;
+  border: 1px solid #1f1f1f;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.synapse-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #707070 0%, #555 55%, #484848 100%);
+}
+
+.synapse-scroll::-webkit-scrollbar-corner {
+  background: #252525;
+}
+
+/* Script Hub / ScriptBlox — roomier thumb, matches shell page chrome */
+.script-hub-scroll,
+.shell-script-browser-scroll {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #6a6a6a #1f1f1f;
+}
+
+.script-hub-scroll::-webkit-scrollbar,
+.shell-script-browser-scroll::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.script-hub-scroll::-webkit-scrollbar-track,
+.shell-script-browser-scroll::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #1a1a1a 0%, #222 50%, #1a1a1a 100%);
+  border-radius: 5px;
+  margin: 4px 0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.45);
+}
+
+.script-hub-scroll::-webkit-scrollbar-thumb,
+.shell-script-browser-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6e6e6e 0%, #4f4f4f 45%, #3a3a3a 100%);
+  border-radius: 5px;
+  border: 1px solid #141414;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.script-hub-scroll::-webkit-scrollbar-thumb:hover,
+.shell-script-browser-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7c7c7c 0%, #5a5a5a 45%, #484848 100%);
+}
+
+.script-hub-scroll::-webkit-scrollbar-thumb:active,
+.shell-script-browser-scroll::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #555 0%, #3d3d3d 100%);
+}
+
+.script-hub-scroll::-webkit-scrollbar-corner,
+.shell-script-browser-scroll::-webkit-scrollbar-corner {
+  background: #1a1a1a;
+}
+
+/* OG (2017) Scrollbars: Industrial, square, high contrast track */
+.og-scroll {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #1a1a1a;
+}
+
+.og-scroll::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.og-scroll::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-left: 1px solid #313131;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+.og-scroll::-webkit-scrollbar-thumb {
+  background: #313131;
+  border: 1px solid #444444;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.og-scroll::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}
+
+.og-scroll::-webkit-scrollbar-thumb:active {
+  background: #252525;
+}
+
+/* Synapse X Scrollbars: Modern, rounded, subtle, dark */
+.sx-scroll {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #444444 #2a2a2a;
+}
+
+.sx-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sx-scroll::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border-radius: 4px;
+}
+
+.sx-scroll::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 4px;
+  border: 2px solid #2a2a2a;
+}
+
+.sx-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+
+.sx-scroll::-webkit-scrollbar-thumb:active {
+  background: #333333;
+}

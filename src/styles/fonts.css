@@ -1,0 +1,29 @@
+/**
+ * Minecraft Seven (Java UI / “Mojangles”-style bitmap)
+ *
+ * Bundled files are from https://github.com/IdreesInc/Minecraft-Font (SIL Open Font License 1.1).
+ * They are a fan recreation of the Minecraft: Java Edition UI look — not official Mojang font files.
+ * Full license text: /fonts/Minecraft-Font-LICENSE.txt
+ */
+@font-face {
+  font-family: "Minecraft Seven";
+  src: url("/fonts/Minecraft.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  /* Tighten used line box toward typical UI sans (see tier 6 / uiFontVerticalTuning). */
+  ascent-override: 88%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Minecraft Seven";
+  src: url("/fonts/Minecraft-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  ascent-override: 88%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}

@@ -1,0 +1,816 @@
+/**
+ * Layout for Monaco widgets reparented to document.body (ScriptMonacoEditor overflowWidgetsDomNode).
+ * Monaco's built-in rules are scoped under .monaco-editor; detached widgets would have no layout.
+ * Derived from monaco-editor suggest.css + parameterHints.css (selectors rewritten).
+ */
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+/* Suggest widget*/
+
+.suggest-widget.editor-widget {
+	width: 430px;
+	z-index: 40;
+	display: flex;
+	flex-direction: column;
+	border-radius: 3px;
+}
+
+.suggest-widget.editor-widget.message {
+	flex-direction: row;
+	align-items: center;
+}
+
+.suggest-widget.editor-widget,
+.suggest-details {
+	flex: 0 1 auto;
+	width: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: var(--vscode-editorSuggestWidget-border, #5a5a5a);
+	background-color: var(--vscode-editorSuggestWidget-background, #2a2a2a);
+}
+
+/* Styles for status bar part */
+
+
+.suggest-widget.editor-widget .suggest-status-bar {
+	box-sizing: border-box;
+	display: none;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	width: 100%;
+	font-size: 80%;
+	padding: 0 4px 0 4px;
+	border-top: 1px solid var(--vscode-editorSuggestWidget-border, #5a5a5a);
+	overflow: hidden;
+}
+
+.suggest-widget.editor-widget.with-status-bar .suggest-status-bar {
+	display: flex;
+}
+
+.suggest-widget.editor-widget .suggest-status-bar .left {
+	padding-right: 8px;
+}
+
+.suggest-widget.editor-widget.with-status-bar .suggest-status-bar .action-label {
+	color: var(--vscode-editorSuggestWidgetStatus-foreground, #c8c8c8);
+}
+
+.suggest-widget.editor-widget.with-status-bar .suggest-status-bar .action-item:not(:last-of-type) .action-label {
+	margin-right: 0;
+}
+
+.suggest-widget.editor-widget.with-status-bar .suggest-status-bar .action-item:not(:last-of-type) .action-label::after {
+	content: ', ';
+	margin-right: 0.3em;
+}
+
+.suggest-widget.editor-widget.with-status-bar .monaco-list .monaco-list-row > .contents > .main > .right > .readMore,
+.suggest-widget.editor-widget.with-status-bar .monaco-list .monaco-list-row.focused.string-label > .contents > .main > .right > .readMore {
+	display: none;
+}
+
+.suggest-widget.editor-widget.with-status-bar:not(.docs-side) .monaco-list .monaco-list-row:hover > .contents > .main > .right.can-expand-details > .details-label {
+	width: 100%;
+}
+
+/* Styles for Message element for when widget is loading or is empty */
+
+.suggest-widget.editor-widget > .message {
+	padding-left: 22px;
+}
+
+/** Styles for the list element **/
+
+.suggest-widget.editor-widget > .tree {
+	height: 100%;
+	width: 100%;
+}
+
+.suggest-widget.editor-widget .monaco-list {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+/** Styles for each row in the list element **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row {
+	display: flex;
+	-mox-box-sizing: border-box;
+	box-sizing: border-box;
+	padding-right: 10px;
+	background-repeat: no-repeat;
+	background-position: 2px 2px;
+	white-space: nowrap;
+	cursor: pointer;
+	touch-action: none;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.focused {
+	color: var(--vscode-editorSuggestWidget-selectedForeground, #ffffff);
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.focused .codicon {
+	color: var(--vscode-editorSuggestWidget-selectedIconForeground, #ffffff);
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents {
+	flex: 1;
+	height: 100%;
+	overflow: hidden;
+	padding-left: 2px;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main {
+	display: flex;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: pre;
+	justify-content: space-between;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .left,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right {
+	display: flex;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row:not(.focused) > .contents > .main .monaco-icon-label {
+	color: var(--vscode-editorSuggestWidget-foreground, #ffffff);
+}
+
+.suggest-widget.editor-widget:not(.frozen) .monaco-highlighted-label .highlight {
+	font-weight: bold;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main .monaco-highlighted-label .highlight {
+	color: var(--vscode-editorSuggestWidget-highlightForeground, #00c6ff);
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.focused > .contents > .main .monaco-highlighted-label .highlight {
+	color: var(--vscode-editorSuggestWidget-focusHighlightForeground, #00c6ff);
+}
+
+/** ReadMore Icon styles **/
+
+.suggest-details > .monaco-scrollable-element > .body > .header > .codicon-close,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .readMore::before {
+	color: inherit;
+	opacity: 1;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .header > .codicon-close {
+	position: absolute;
+	top: 6px;
+	right: 2px;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .header > .codicon-close:hover,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .readMore:hover {
+	opacity: 1;
+}
+
+/** signature, qualifier, type/details opacity **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .details-label {
+	opacity: 0.7;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .left > .signature-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	opacity: 0.6;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .left > .qualifier-label {
+	margin-left: 12px;
+	opacity: 0.4;
+	font-size: 85%;
+	line-height: initial;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	align-self: center;
+}
+
+/** Type Info and icon next to the label in the focused completion item **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .details-label {
+	font-size: 85%;
+	margin-left: 1.1em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .details-label > .monaco-tokenized-source {
+	display: inline;
+}
+
+/** Details: if using CompletionItem#details, show on focus **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .details-label {
+	display: none;
+}
+
+.suggest-widget.editor-widget:not(.shows-details) .monaco-list .monaco-list-row.focused > .contents > .main > .right > .details-label {
+	display: inline;
+}
+
+/** Details: if using CompletionItemLabel#details, always show **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row:not(.string-label) > .contents > .main > .right > .details-label,
+.suggest-widget.editor-widget.docs-side .monaco-list .monaco-list-row.focused:not(.string-label) > .contents > .main > .right > .details-label {
+	display: inline;
+}
+
+/** Ellipsis on hover **/
+
+.suggest-widget.editor-widget:not(.docs-side) .monaco-list .monaco-list-row.focused:hover > .contents > .main > .right.can-expand-details > .details-label {
+	width: calc(100% - 26px);
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .left {
+	flex-shrink: 1;
+	flex-grow: 1;
+	overflow: hidden;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .left > .monaco-icon-label {
+	flex-shrink: 0;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row:not(.string-label) > .contents > .main > .left > .monaco-icon-label {
+	max-width: 100%;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.string-label > .contents > .main > .left > .monaco-icon-label {
+	flex-shrink: 1;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right {
+	overflow: hidden;
+	flex-shrink: 4;
+	max-width: 70%;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .readMore {
+	display: inline-block;
+	position: absolute;
+	right: 10px;
+	width: 18px;
+	height: 18px;
+	visibility: hidden;
+}
+
+/** Do NOT display ReadMore when docs is side/below **/
+
+.suggest-widget.editor-widget.docs-side .monaco-list .monaco-list-row > .contents > .main > .right > .readMore {
+	display: none !important;
+}
+
+/** Do NOT display ReadMore when using plain CompletionItemLabel (details/documentation might not be resolved) **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.string-label > .contents > .main > .right > .readMore {
+	display: none;
+}
+
+/** Focused item can show ReadMore, but can't when docs is side/below **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.focused.string-label > .contents > .main > .right > .readMore {
+	display: inline-block;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.focused:hover > .contents > .main > .right > .readMore {
+	visibility: visible;
+}
+
+/** Styles for each row in the list **/
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .monaco-icon-label.deprecated {
+	opacity: 0.66;
+	text-decoration: unset;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .monaco-icon-label.deprecated > .monaco-icon-label-container > .monaco-icon-name-container {
+	text-decoration: line-through;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .monaco-icon-label::before {
+	height: 100%;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .icon {
+	display: block;
+	height: 16px;
+	width: 16px;
+	margin-left: 2px;
+	background-repeat: no-repeat;
+	background-size: 80%;
+	background-position: center;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .icon.hide {
+	display: none;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .suggest-icon {
+	display: flex;
+	align-items: center;
+	margin-right: 4px;
+}
+
+.suggest-widget.editor-widget.no-icons .monaco-list .monaco-list-row .icon,
+.suggest-widget.editor-widget.no-icons .monaco-list .monaco-list-row .suggest-icon::before {
+	display: none;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .icon.customcolor .colorspan {
+	margin: 0 0 0 0.3em;
+	border: 0.1em solid #000;
+	width: 0.7em;
+	height: 0.7em;
+	display: inline-block;
+}
+
+/** Styles for the docs of the completion item in focus **/
+
+.suggest-details-container {
+	z-index: 41;
+}
+
+.suggest-details {
+	display: flex;
+	flex-direction: column;
+	cursor: default;
+	color: var(--vscode-editorSuggestWidget-foreground, #ffffff);
+}
+
+.suggest-details:focus {
+	border-color: var(--vscode-focusBorder, #5a5a5a);
+}
+
+.suggest-details a {
+	color: var(--vscode-textLink-foreground, #006aff);
+}
+
+.suggest-details a:hover {
+	color: var(--vscode-textLink-activeForeground, #3a8cff);
+}
+
+.suggest-details code {
+	background-color: var(--vscode-textCodeBlock-background, rgba(0,0,0,0.28));
+}
+
+.suggest-details.no-docs {
+	display: none;
+}
+
+.suggest-details > .monaco-scrollable-element {
+	flex: 1;
+}
+
+.suggest-details > .monaco-scrollable-element > .body {
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .header > .type {
+	flex: 2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	opacity: 0.7;
+	white-space: pre;
+	margin: 0 24px 0 0;
+	padding: 4px 0 4px 5px;
+}
+
+.suggest-details.detail-and-doc > .monaco-scrollable-element > .body > .header > .type {
+	padding-bottom: 12px;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .header > .type.auto-wrap {
+	white-space: normal;
+	word-break: break-all;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs {
+	margin: 0;
+	padding: 4px 5px;
+	white-space: pre-wrap;
+}
+
+.suggest-details.no-type > .monaco-scrollable-element > .body > .docs {
+	margin-right: 24px;
+	overflow: hidden;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs.markdown-docs {
+	padding: 0;
+	white-space: initial;
+	min-height: calc(1rem + 8px);
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs.markdown-docs > div,
+.suggest-details > .monaco-scrollable-element > .body > .docs.markdown-docs > span:not(:empty) {
+	padding: 4px 5px;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs.markdown-docs > div > p:first-child {
+	margin-top: 0;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs.markdown-docs > div > p:last-child {
+	margin-bottom: 0;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs.markdown-docs .monaco-tokenized-source {
+	white-space: pre;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs .code {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > .docs.markdown-docs .codicon {
+	vertical-align: sub;
+}
+
+.suggest-details > .monaco-scrollable-element > .body > p:empty {
+	display: none;
+}
+
+.suggest-details code {
+	border-radius: 3px;
+	padding: 0 0.4em;
+}
+
+.suggest-details ul {
+	padding-left: 20px;
+}
+
+.suggest-details ol {
+	padding-left: 20px;
+}
+
+.suggest-details p code {
+	font-family: var(--monaco-monospace-font, Consolas, 'Courier New', monospace);
+}
+
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.editor-widget.parameter-hints-widget {
+	/* Must be higher than the sash's z-index and terminal canvases but lower than the suggest widget */
+	z-index: 39;
+	display: flex;
+	flex-direction: column;
+	line-height: 1.5em;
+	cursor: default;
+	color: var(--vscode-editorHoverWidget-foreground, #ffffff);
+	background-color: var(--vscode-editorHoverWidget-background, #2a2a2a);
+	border: 1px solid var(--vscode-editorHoverWidget-border, #5a5a5a);
+}
+
+.editor-widget.parameter-hints-widget > .phwrapper {
+	max-width: 440px;
+	display: flex;
+	flex-direction: row;
+}
+
+.editor-widget.parameter-hints-widget.multiple {
+	min-height: 3.3em;
+	padding: 0;
+}
+
+.editor-widget.parameter-hints-widget.multiple .body::before {
+	content: "";
+	display: block;
+	height: 100%;
+	position: absolute;
+	opacity: 0.5;
+	border-left: 1px solid var(--vscode-editorHoverWidget-border, #5a5a5a);
+}
+
+.editor-widget.parameter-hints-widget p,
+.editor-widget.parameter-hints-widget ul {
+	margin: 8px 0;
+}
+
+.editor-widget.parameter-hints-widget .monaco-scrollable-element,
+.editor-widget.parameter-hints-widget .body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.editor-widget.parameter-hints-widget .signature {
+	padding: 4px 5px;
+	position: relative;
+}
+
+.editor-widget.parameter-hints-widget .signature.has-docs::after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	padding-top: 4px;
+	opacity: 0.5;
+	border-bottom: 1px solid var(--vscode-editorHoverWidget-border, #5a5a5a);
+}
+
+.editor-widget.parameter-hints-widget .code {
+	font-family: var(--vscode-parameterHintsWidget-editorFontFamily, Consolas), var(--vscode-parameterHintsWidget-editorFontFamilyDefault, monospace);
+}
+
+.editor-widget.parameter-hints-widget .docs {
+	padding: 0 10px 0 5px;
+	white-space: pre-wrap;
+}
+
+.editor-widget.parameter-hints-widget .docs.empty {
+	display: none;
+}
+
+.editor-widget.parameter-hints-widget .docs a {
+	color: var(--vscode-textLink-foreground, #006aff);
+}
+
+.editor-widget.parameter-hints-widget .docs a:hover {
+	color: var(--vscode-textLink-activeForeground, #3a8cff);
+	cursor: pointer;
+}
+
+.editor-widget.parameter-hints-widget .docs .markdown-docs {
+	white-space: initial;
+}
+
+.editor-widget.parameter-hints-widget .docs code {
+	font-family: var(--monaco-monospace-font, Consolas, 'Courier New', monospace);
+	border-radius: 3px;
+	padding: 0 0.4em;
+	background-color: var(--vscode-textCodeBlock-background, rgba(0,0,0,0.28));
+}
+
+.editor-widget.parameter-hints-widget .docs .monaco-tokenized-source,
+.editor-widget.parameter-hints-widget .docs .code {
+	white-space: pre-wrap;
+}
+
+.editor-widget.parameter-hints-widget .controls {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	min-width: 22px;
+	justify-content: flex-end;
+}
+
+.editor-widget.parameter-hints-widget.multiple .controls {
+	display: flex;
+	padding: 0 2px;
+}
+
+.editor-widget.parameter-hints-widget.multiple .button {
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.editor-widget.parameter-hints-widget .button.previous {
+	bottom: 24px;
+}
+
+.editor-widget.parameter-hints-widget .overloads {
+	text-align: center;
+	height: 12px;
+	line-height: 12px;
+	font-family: var(--monaco-monospace-font, Consolas, 'Courier New', monospace);
+}
+
+.editor-widget.parameter-hints-widget .signature .parameter.active {
+	color: var(--vscode-editorHoverWidget-highlightForeground, #00c6ff);
+	font-weight: bold;
+}
+
+.editor-widget.parameter-hints-widget .documentation-parameter > .parameter {
+	font-weight: bold;
+	margin-right: 0.5em;
+}
+
+/* Stacking + theme fallbacks: CSS vars are normally defined on .monaco-editor only */
+.suggest-widget.editor-widget {
+  z-index: 10000 !important;
+  font-family: Consolas, "Courier New", monospace !important;
+}
+
+.suggest-details-container {
+  z-index: 10001 !important;
+  font-family: Consolas, "Courier New", monospace !important;
+}
+
+.suggest-details {
+  font-family: Consolas, "Courier New", monospace !important;
+}
+
+/* Below completion list (Monaco uses 39 vs 40 on suggest) */
+.editor-widget.parameter-hints-widget {
+  z-index: 9998 !important;
+  font-family: Consolas, "Courier New", monospace !important;
+}
+
+.suggest-widget.editor-widget,
+.suggest-details {
+  border-color: var(--vscode-editorSuggestWidget-border, #5a5a5a) !important;
+  background-color: var(--vscode-editorSuggestWidget-background, #2a2a2a) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+  box-sizing: border-box !important;
+}
+
+/*
+ * Text colors: VS Code theme vars are undefined on document.body, so monaco’s
+ * var(--vscode-editorSuggestWidget-*) rules make labels/codicons invisible or wrong.
+ * Use full selector chains + .codicon.codicon-symbol-* so we beat .focused .codicon.
+ */
+.suggest-widget.editor-widget .monaco-list .monaco-list-row {
+  color: #ffffff !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.focused {
+  color: #ffffff !important;
+}
+.suggest-widget.editor-widget
+  .monaco-list
+  .monaco-list-row:not(.focused)
+  > .contents
+  > .main
+  .monaco-icon-label,
+.suggest-widget.editor-widget
+  .monaco-list
+  .monaco-list-row.focused
+  > .contents
+  > .main
+  .monaco-icon-label,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .monaco-icon-label .label-name,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .monaco-icon-label .monaco-icon-name-container {
+  color: #ffffff !important;
+}
+.suggest-widget.editor-widget
+  .monaco-list
+  .monaco-list-row
+  > .contents
+  > .main
+  .monaco-highlighted-label {
+  color: #ffffff !important;
+}
+
+.suggest-details,
+.suggest-details .monaco-tokenized-source {
+  color: #ffffff !important;
+}
+
+.suggest-details a {
+  color: #006aff !important;
+}
+
+.suggest-details a:hover {
+  color: #3a8cff !important;
+}
+
+.suggest-details code {
+  color: #c8c8c8 !important;
+  background-color: rgba(64, 128, 128, 0.35) !important;
+}
+
+/* Filter / match highlight — Synapse Number */
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .monaco-highlighted-label .highlight,
+.suggest-widget.editor-widget
+  .monaco-list
+  .monaco-list-row.focused
+  .monaco-highlighted-label
+  .highlight {
+  color: #00c6ff !important;
+}
+
+/* Right-side type / detail */
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .right > .details-label {
+  color: #c8c8c8 !important;
+  opacity: 1 !important;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .left > .qualifier-label {
+  color: #7f7f7f !important;
+  opacity: 1 !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row > .contents > .main > .left > .signature-label {
+  color: #c8c8c8 !important;
+  opacity: 1 !important;
+}
+
+.suggest-widget.editor-widget .suggest-status-bar,
+.suggest-widget.editor-widget .suggest-status-bar .action-label {
+  color: #c8c8c8 !important;
+}
+
+.editor-widget.parameter-hints-widget {
+  color: #ffffff !important;
+  background-color: var(--vscode-editorHoverWidget-background, #2a2a2a) !important;
+  border-color: var(--vscode-editorHoverWidget-border, #5a5a5a) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+  box-sizing: border-box !important;
+}
+
+.editor-widget.parameter-hints-widget .signature {
+  color: #ffffff !important;
+}
+
+.editor-widget.parameter-hints-widget .documentation-parameter,
+.editor-widget.parameter-hints-widget .docs {
+  color: #c8c8c8 !important;
+}
+
+.editor-widget.parameter-hints-widget .signature .parameter.active {
+  color: #00c6ff !important;
+}
+
+.editor-widget.parameter-hints-widget .docs a {
+  color: #006aff !important;
+}
+
+.editor-widget.parameter-hints-widget .docs a:hover {
+  color: #3a8cff !important;
+}
+
+.editor-widget.parameter-hints-widget .docs code {
+  color: #c8c8c8 !important;
+  background-color: rgba(64, 128, 128, 0.35) !important;
+}
+
+.editor-widget.parameter-hints-widget.multiple .body::before {
+  border-left-color: var(--vscode-editorHoverWidget-border, #5a5a5a) !important;
+}
+
+.editor-widget.parameter-hints-widget .signature.has-docs::after {
+  border-bottom-color: var(--vscode-editorHoverWidget-border, #5a5a5a) !important;
+}
+
+.suggest-widget.editor-widget .monaco-list .monaco-list-row.focused,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row:hover {
+  background: var(--vscode-editorSuggestWidget-selectedBackground, #3a3a3a) !important;
+}
+
+/*
+ * Kind icons — SynapseX GetDarkPalette(); use .codicon.codicon-symbol-* so we beat
+ * .monaco-list-row.focused .codicon { color: var(...) }.
+ */
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-method,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-function,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-constructor,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-operator {
+  color: #3a8cff !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-class,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-struct,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-interface,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-namespace,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-module {
+  color: #006aff !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-variable,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-field,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-property,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-type-parameter,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-value {
+  color: #c8c8c8 !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-keyword {
+  color: #006aff !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-constant,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-enum,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-enum-member {
+  color: #00c6ff !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-text,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-snippet,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-reference {
+  color: #7f7f7f !important;
+}
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-color,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-file,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-folder,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-event,
+.suggest-widget.editor-widget .monaco-list .monaco-list-row .codicon.codicon-symbol-unit {
+  color: #408080 !important;
+}

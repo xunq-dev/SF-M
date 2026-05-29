@@ -1,0 +1,71 @@
+{
+  "name": "@figma/my-make-file",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "node ./scripts/run-vite.mjs",
+    "build": "vite build",
+    "build:release": "npm run export:ui && npm run build",
+    "preview": "node ./scripts/run-vite.mjs preview",
+    "tauri": "tauri",
+    "tauri:dev": "node ./scripts/run-tauri-dev.mjs",
+    "tauri:build": "call \"H:\\Development\\visual studio\\vs\\Common7\\Tools\\VsDevCmd.bat\" -arch=amd64 -host_arch=amd64 && tauri build",
+    "release": "call \"H:\\Development\\visual studio\\vs\\Common7\\Tools\\VsDevCmd.bat\" -arch=amd64 -host_arch=amd64 && tauri build && npm run source:pack",
+    "export:ui": "node ./scripts/export-ui.mjs",
+    "source:verify": "node ./scripts/verify-source.mjs",
+    "source:verify:build": "node ./scripts/verify-source.mjs --build",
+    "source:measure": "node ./scripts/measure-workspace.mjs",
+    "source:pack": "node ./scripts/pack-source.mjs",
+    "source:pack:full": "node ./scripts/pack-source.mjs --all",
+    "source:pack:ui": "node ./scripts/pack-ui-export.mjs",
+    "clean": "node ./scripts/clean-workspace.mjs",
+    "clean:dry": "node ./scripts/clean-workspace.mjs --dry-run"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@radix-ui/react-context-menu": "2.2.6",
+    "@radix-ui/react-select": "2.1.6",
+    "@radix-ui/react-slider": "1.2.3",
+    "@radix-ui/react-tabs": "1.1.3",
+    "@tauri-apps/api": "^2.10.1",
+    "@tauri-apps/plugin-dialog": "^2.7.0",
+    "@tauri-apps/plugin-fs": "^2.5.0",
+    "clsx": "2.1.1",
+    "fflate": "^0.8.2",
+    "luaparse": "^0.3.1",
+    "lucide-react": "0.487.0",
+    "monaco-editor": "^0.55.1",
+    "monaco-themes": "^0.4.8",
+    "motion": "12.23.24",
+    "react-router": "7.13.0",
+    "tailwind-merge": "3.2.0",
+    "tw-animate-css": "1.3.8",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.12",
+    "@tauri-apps/cli": "^2.10.0",
+    "@vitejs/plugin-react": "4.7.0",
+    "tailwindcss": "4.1.12",
+    "vite": "6.3.5",
+    "vite-plugin-monaco-editor": "^1.1.0"
+  },
+  "peerDependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "6.3.5"
+    }
+  }
+}

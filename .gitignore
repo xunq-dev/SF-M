@@ -1,0 +1,17 @@
+# Regeneratable — never commit; run `npm run clean` to delete locally
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+ui-export/
+someone-elses-v3-project-workspace/
+
+# Pack outputs (npm run source:pack / source:pack:ui)
+synapse-source-small.zip
+synapse-ui-export.zip
+
+# Local tooling / logs
+*.log
+vs_buildtools.exe
+.DS_Store
+Thumbs.db
