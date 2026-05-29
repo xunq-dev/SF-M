@@ -1,15 +1,16 @@
+````md
 <p align="center">
-  <img src="./assets/paintbrush-apple.png" width="128" alt="Synapse Framework MAC">
+  <img src="logo%20presets/unreleased-sx3.png" width="128" alt="Synapse Framework MAC">
 </p>
 
 <h1 align="center">Synapse Framework MAC</h1>
 
 <p align="center">
-  Advanced Roblox script execution environment for macOS
+  Advanced Roblox Script Execution Environment for macOS
 </p>
 
 <p align="center">
-  Monaco Editor • WebSocket Bridge • Multiple Synapse Themes • Native Tauri Desktop Application
+  Monaco Editor • WebSocket Bridge • Multiple Synapse Interfaces • Native Tauri Application
 </p>
 
 <p align="center">
@@ -23,123 +24,84 @@
 ---
 
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   Synapse Framework MAC                                     │
-│                                                             │
-│   Native macOS executor framework built with React,         │
-│   Tauri and Rust.                                           │
-│                                                             │
-│   • Multiple Synapse UI shells                              │
-│   • Monaco-powered script editor                            │
-│   • WebSocket and Port Bridge support                       │
-│   • Cross-game persistence                                  │
-│   • Native Apple Silicon and Intel support                  │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+   ███████╗██╗   ██╗███╗   ██╗ █████╗ ██████╗ ███████╗███████╗
+   ██╔════╝╚██╗ ██╔╝████╗  ██║██╔══██╗██╔══██╗██╔════╝██╔════╝
+   ███████╗ ╚████╔╝ ██╔██╗ ██║███████║██████╔╝███████╗█████╗
+   ╚════██║  ╚██╔╝  ██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══╝
+   ███████║   ██║   ██║ ╚████║██║  ██║██║     ███████║███████╗
+   ╚══════╝   ╚═╝   ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚══════╝
 
-A modern recreation of the Synapse experience for macOS, combining a native desktop application with multiple classic UI shells, integrated executor bridges, and a customizable scripting environment.
+                Framework MAC
+````
+
+Native macOS executor framework built with React, Tauri, and Rust.
 
 ## Features
 
-| Component | Description |
-|------------|------------|
-| Monaco Editor | High-performance code editor with syntax highlighting and IntelliSense support |
-| Synapse Themes | Synapse Blue, Synapse Original 2017, Synapse X, and V3 |
-| WebSocket Bridge | Persistent executor communication through `/ws` |
-| Port Bridge | HTTP polling bridge for executors without WebSocket support |
-| Tauri Backend | Native desktop integration powered by Rust |
-| Shared Configuration | Unified settings and bridge management across all shells |
-| UI Export System | Portable UI snapshots for external platform ports |
-| Source Packaging | Lightweight source distribution and verification tooling |
+* Multiple Synapse UI shells
+* Monaco-powered script editor
+* WebSocket Bridge (`/ws`)
+* Port Bridge (`/port_bridge/*`)
+* Cross-session persistence
+* Native Apple Silicon and Intel support
+* Shared settings across all interfaces
+* UI export system for external ports
 
 ## Documentation
 
-| Document | Description |
-|----------|-------------|
-| `docs/PROJECT_OVERVIEW.md` | Architecture, routing, IPC, shell management, and file structure |
-| `docs/WEBSOCKET_BRIDGE.md` | WebSocket and Port Bridge protocols, settings, and Lua examples |
-| `docs/SOURCE_DISTRIBUTION.md` | Source packaging, verification, export, and distribution |
+| Document                      | Description                                           |
+| ----------------------------- | ----------------------------------------------------- |
+| `docs/PROJECT_OVERVIEW.md`    | Architecture, routing, IPC, and application structure |
+| `docs/WEBSOCKET_BRIDGE.md`    | WebSocket and Port Bridge protocols                   |
+| `docs/SOURCE_DISTRIBUTION.md` | Source verification, export, and packaging            |
 
 ## Architecture
 
 ```text
                     ┌─────────────────┐
                     │   React / Vite  │
-                    │      Frontend   │
+                    │    Frontend     │
                     └────────┬────────┘
-                             │ invoke
+                             │
                              ▼
                     ┌─────────────────┐
                     │  Rust / Tauri   │
                     │     Backend     │
                     └────────┬────────┘
                              │
-                ┌────────────┴────────────┐
-                │                         │
-                ▼                         ▼
-       ┌─────────────────┐      ┌─────────────────┐
-       │ WebSocket Bridge│      │   Port Bridge   │
-       │      /ws        │      │ /port_bridge/*  │
-       └────────┬────────┘      └────────┬────────┘
-                │                         │
-                ▼                         ▼
-       ┌─────────────────┐      ┌─────────────────┐
-       │ Lua Executors   │      │ Lua Executors   │
-       │ (WebSocket)     │      │   (HTTP Only)   │
-       └─────────────────┘      └─────────────────┘
+               ┌─────────────┴─────────────┐
+               │                           │
+               ▼                           ▼
+      ┌─────────────────┐       ┌─────────────────┐
+      │ WebSocket Bridge│       │   Port Bridge   │
+      │      /ws        │       │ /port_bridge/*  │
+      └────────┬────────┘       └────────┬────────┘
+               │                         │
+               ▼                         ▼
+        Roblox Executors         Roblox Executors
 ```
 
 ## Installation
-
-### Requirements
-
-- Node.js 18+
-- Rust Stable Toolchain
-- Tauri CLI
-- macOS 13+
-- Apple Silicon or Intel Mac
-
-### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Development
+## Development
 
 ```bash
 npm run tauri:dev
 ```
 
-### Production Build
+## Production Build
 
 ```bash
 npm run tauri:build
 ```
 
-## Project Structure
-
-```text
-src/
-├── app/
-├── components/
-├── pages/
-├── themes/
-└── main.tsx
-
-src-tauri/
-├── src/
-├── resources/
-└── tauri.conf.json
-
-docs/
-├── PROJECT_OVERVIEW.md
-├── WEBSOCKET_BRIDGE.md
-└── SOURCE_DISTRIBUTION.md
-```
-
 ## License
 
 MIT License
+
+```
+```
