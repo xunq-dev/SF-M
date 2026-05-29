@@ -26,7 +26,17 @@
   <a href="#architecture">Architecture</a>
 </p>
 
-Native macOS executor framework built with React, Tauri, and Rust.
+Native macOS executor framework built with React, Tauri, and Rust!
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=xunq-dev%2FSF-M&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=xunq-dev/SF-M&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=xunq-dev/SF-M&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=xunq-dev/SF-M&type=date&legend=top-left" />
+ </picture>
+</a>
 
 ## Features
 
